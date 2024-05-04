@@ -4,8 +4,9 @@
 
 //vga
 enum vga_color {
-	VGA_COLOR_BLACK = 0,
-	VGA_COLOR_LIGHT_GREY = 7,
+	VGA_BLACK = 0,
+	VGA_GREY = 7,
+	VGA_GREEN = 10,
 };
 
 static inline uint16_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
@@ -28,7 +29,7 @@ uint16_t *terminal_buffer;
 void terminal_init(void) {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	terminal_color = vga_entry_color(VGA_GREEN, VGA_BLACK);
 	terminal_buffer = (uint16_t *)0xb8000;
 
 	for(size_t y = 0; y < VGA_HEIGHT; y++) {
