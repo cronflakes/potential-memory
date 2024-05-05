@@ -73,6 +73,9 @@ void terminal_write(const char *data, size_t size) {
 }
 
 void kernel_main(void) {
+	int x = 5;
+	int y = x / 0;
+	y++;
 	terminal_init();
 	init_gdt();
 	init_idt();
