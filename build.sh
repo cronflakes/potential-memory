@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if grub-file --is-x86-multioboot tiny.bin; then
+if grub-file --is-x86-multiboot tiny.bin; then
 	echo multiboot confirmed
 else 
 	echo file is not multiboot

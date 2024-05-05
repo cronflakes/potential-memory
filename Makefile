@@ -1,19 +1,21 @@
 CC = ${HOME}/bin/i686-elf-gcc
-AS = ${HOME}/bin/i686-elf-as 
 CFLAGS = -ffreestanding -std=gnu99 -O2 -Wall -Wextra
 
+all: boot kernel 
+
 clean:
-	rm -rf *.o
+	rm -rf *.o tiny.*
 
 boot: 
-	$(AS) boot.s -o boot.o
-	$(AS) gdt/gdt.s -o gdts.o
-
+	nasm -f elf32 boot.s -o boot.o
+	nasm -f elf32 gdt/gdt.s -o gdts.o
+	nasm -f elf32 idt/idt.s -o idts.o
+	
 kernel: 
 	$(CC) -g -c kernel.c -o kernel.o $(CFLAGS)
 	$(CC) -g -c gdt/gdt.c -o gdt.o $(CFLAGS)
+	$(CC) -g -c idt/idt.c -o idt.o $(CFLAGS)
 
-iso:
-	$(CC) -T linker.ld -o tiny.bin -ffreestanding -O2 -nostdlib boot.o kernel.o gdt.o gdts.o -lgcc
+# i686-elf-gcc -T linker.ld -o tiny.bin -ffreestanding -O2 -nostdlib boot.o kernel.o gdt.o gdts.o \
+	       idt.o idts.o -lgcc 
 
-# i686-elf-gcc -T linked.ld -o myos.bin -ffreestanding -O2 -nosdtlib boot.o kernel.o -lgcc

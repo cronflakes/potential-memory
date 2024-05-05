@@ -2,6 +2,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "gdt/gdt.h"
+#include "idt/idt.h"
+
 //vga
 enum vga_color {
 	VGA_BLACK = 0,
@@ -29,7 +32,7 @@ uint16_t *terminal_buffer;
 void terminal_init(void) {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_GREEN, VGA_BLACK);
+	terminal_color = vga_entry_color(VGA_GREY, VGA_BLACK);
 	terminal_buffer = (uint16_t *)0xb8000;
 
 	for(size_t y = 0; y < VGA_HEIGHT; y++) {
@@ -71,5 +74,7 @@ void terminal_write(const char *data, size_t size) {
 
 void kernel_main(void) {
 	terminal_init();
-	terminal_write("hello, world\n", 13);
+	init_gdt();
+	init_idt();
+	terminal_write("gdt and idt init'd\n", 19);
 }

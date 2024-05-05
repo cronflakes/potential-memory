@@ -1,17 +1,13 @@
-.global set_gdt
-.extern gdtp
-.type set_gdt, @function
+global set_gdt
+extern gdtp
 set_gdt:
+	lgdt [gdtp]
+	jmp  0x08:.reload_CS
 
-	lgdt (gdtp)
-	ljmp $0x08, $reload_CS
-
-reload_CS:
-
-	mov $0x10, %ax
-	mov %ds, %ax
-	mov %es, %ax
-	mov %fs, %ax
-	mov %gs, %ax
-	mov %ss, %ax
-	ret
+.reload_CS:
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax

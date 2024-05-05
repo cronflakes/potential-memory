@@ -17,8 +17,5 @@ struct gdt_ptr {
 	uint32_t base;
 } __attribute__((packed));
 
-struct gdt_entry gdt[SEGMENTS];
-struct gdt_ptr *gdtp;
-
 extern void init_gdt();
 #endif
