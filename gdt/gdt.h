@@ -18,4 +18,5 @@ struct gdt_ptr {
 } __attribute__((packed));
 
 extern void init_gdt();
+extern void set_gdt();
 #endif
