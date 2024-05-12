@@ -4,8 +4,8 @@
 #include "idt.h"
 #include "../terminal/terminal.h"
 
-static inline void outportb(uint16_t, uint8_t);
-static inline uint8_t inportb(uint16_t);
+void outportb(uint16_t, uint8_t);
+uint8_t inportb(uint16_t);
 
 __attribute__((aligned(0x10))) idt_entry_t idt[256];
 idtr_t idtr;
@@ -127,11 +127,11 @@ void irq_handler(regs *r) {
 }
 
 
-static inline void outportb(uint16_t port, uint8_t value) {
+void outportb(uint16_t port, uint8_t value) {
 	asm volatile ("outb %1, %0" : : "dN"(port), "a"(value));
 }
 
-static inline uint8_t inportb(uint16_t port) {
+uint8_t inportb(uint16_t port) {
 	uint8_t c;
 	asm volatile ("inb %1, %0" : "=a"(c) : "dN"(port));
 	return c;
