@@ -3,6 +3,7 @@
 
 #include "../idt/idt.h"
 #include "../terminal/terminal.h"
+#include "../utils/utils.h"
 
 uint32_t ticks;
 
