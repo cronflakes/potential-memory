@@ -5,7 +5,7 @@ OBJ = boot.o kernel.o gdt.o gdts.o idt.o idts.o vga.o terminal.o pit.o
 all: boot kernel iso
 
 clean:
-	rm -rf *.o tiny.*
+	rm -rf *.o tiny.* iso/
 
 boot: 
 	nasm -f elf32 boot.s -o boot.o
