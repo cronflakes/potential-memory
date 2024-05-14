@@ -1,5 +1,5 @@
 CC = ${HOME}/bin/i686-elf-gcc
-CFLAGS = -ffreestanding -std=gnu99 -O0 -Wall -Wextra
+CFLAGS = -I../include -ffreestanding -std=gnu99 -O0 -Wall -Wextra
 OBJ = boot.o kernel.o gdt.o gdts.o idt.o idts.o vga.o terminal.o pit.o utils.o
 
 all: boot kernel iso

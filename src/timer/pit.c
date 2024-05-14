@@ -1,9 +1,9 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#include "../idt/idt.h"
-#include "../terminal/terminal.h"
-#include "../utils/utils.h"
+#include "idt.h"
+#include "terminal.h"
+#include "utils.h"
 
 uint32_t ticks;
 
