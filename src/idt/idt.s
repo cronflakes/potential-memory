@@ -381,6 +381,7 @@ irq_stub:
 	push eax
 	mov eax, irq_handler
 	call eax
+	pop eax
 	pop gs
 	pop fs
 	pop es
@@ -394,5 +395,6 @@ global set_idt
 extern idtr
 set_idt:
 	lidt [idtr]
+	sti
 	ret
 

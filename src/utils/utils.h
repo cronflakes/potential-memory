@@ -3,5 +3,6 @@
 
 extern void outportb(uint16_t, uint8_t);
 extern uint8_t inportb(uint16_t);
+extern void print(char *);
 
 #endif

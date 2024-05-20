@@ -1,6 +1,7 @@
 CC = ${HOME}/bin/i686-elf-gcc
 CFLAGS = -I../include -ffreestanding -std=gnu99 -O0 -Wall -Wextra
-OBJ = boot.o kernel.o gdt.o gdts.o idt.o idts.o vga.o terminal.o pit.o utils.o
+OBJ = boot.o kernel.o gdt.o gdts.o idt.o idts.o vga.o terminal.o pit.o utils.o \
+      keyboard.o
 
 all: boot kernel iso
 
@@ -20,6 +21,7 @@ kernel:
 	$(CC) -g -c terminal/terminal.c -o terminal.o $(CFLAGS)
 	$(CC) -g -c utils/utils.c -o utils.o $(CFLAGS)
 	$(CC) -g -c timer/pit.c -o pit.o $(CFLAGS)
+	$(CC) -g -c drivers/keyboard/keyboard.c -o keyboard.o $(CFLAGS)
 
 iso: 	$(OBJ)
 	ld -m elf_i386 -T linker.ld -o tiny.bin -O2 -nostdlib $(OBJ) 

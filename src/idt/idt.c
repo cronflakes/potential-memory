@@ -92,6 +92,9 @@ void init_idt() {
 	idt_set_descriptor(31, (uint32_t)isr31, 0x8e);
 
 	//interrupts
+	idt_set_descriptor(33, (uint32_t)irq1, 0x8e);
+
+	/*
 	idt_set_descriptor(32, (uint32_t)irq0, 0x8e);
 	idt_set_descriptor(33, (uint32_t)irq1, 0x8e);
 	idt_set_descriptor(34, (uint32_t)irq2, 0x8e);
@@ -108,11 +111,13 @@ void init_idt() {
 	idt_set_descriptor(45, (uint32_t)irq13, 0x8e);
 	idt_set_descriptor(46, (uint32_t)irq14, 0x8e);
 	idt_set_descriptor(47, (uint32_t)irq15, 0x8e);
+	*/
 
 	set_idt();
 }
 
 void irq_handler(regs *r) {
+	//terminal_write("irq_handler() called\n", 21);
 	void (*handler)(regs *r);
 	handler = irq_routines[r->irq_line - 32];
 	if(handler)

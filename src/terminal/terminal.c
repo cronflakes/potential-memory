@@ -49,7 +49,7 @@ static void terminal_putentryat(uint8_t c, uint8_t color, size_t x, size_t y) {
 	cursor();
 }
 
-static void terminal_putchar(char c) {
+void terminal_putchar(uint8_t c) {
 	if(c == '\n') {
 		terminal_col = 0;
 		terminal_row++;
@@ -64,7 +64,9 @@ static void terminal_putchar(char c) {
 	}
 }
 
-void terminal_write(const char *data, size_t len) {
+
+//string literals are not of type unsigned char *
+void terminal_write(char *data, size_t len) {
 	for(size_t i = 0; i < len; i++)
 		terminal_putchar(data[i]);
 }	

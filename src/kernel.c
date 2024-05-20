@@ -2,17 +2,20 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "terminal/terminal.h"
-#include "gdt/gdt.h"
-#include "idt/idt.h"
-#include "timer/pit.h"
+#include "terminal.h"
+#include "gdt.h"
+#include "idt.h"
+#include "pit.h"
+#include "keyboard.h"
+#include "utils.h"
 
 void kernel_main(void) {
 	terminal_init();
 	init_gdt();
 	init_idt();
-	terminal_write("gdt and idt init'd\n", 19);
+	print("gdt and idt init'd\n");
+	init_keyboard();
+	//init_pit();
 
-	init_pit();
-	terminal_write("gdt and idt init'd again\n", 25);
+	for(;;);
 }

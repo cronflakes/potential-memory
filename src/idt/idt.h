@@ -26,7 +26,9 @@ typedef struct {
 extern void init_idt(void);
 extern void init_irq(void);
 extern void set_idt(void);
-extern void irq_install_handler(uint32_t, void(*)(regs *));
+extern void irq_install_handler(uint32_t, void(*handler)(regs *));
+
+extern void irq_handler(regs *);
 
 extern void isr0();
 extern void isr1();
