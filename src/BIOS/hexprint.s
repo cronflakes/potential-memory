@@ -20,13 +20,13 @@ HEXloopascii:
 
 HEXloopput:
 	  mov [bx], al
-	  sub cx, 0x1
+	  dec cx
 	  shr dx, 0x4
-	  sub bx, 0x1
+	  dec bx
 	  jmp HEXloop
 
 HEXloopend:
 	  mov bx, HEXstring
 	  call BIOSprint
 
-	  HEXstring db '0x0000', 0
+	  HEXstring db '0x0000', 13, 10, 0

@@ -1,33 +1,35 @@
-MBOOTALIGN 	equ 1 << 0
-MEMINFO 	equ 1<<1
-FLAGS 		equ MBOOTALIGN | MEMINFO
-MAGIC		equ 0x1badb002
-CHECKSUM	equ -(MAGIC + FLAGS)
+ 	org 0x7c00
 
-section .multiboot
-ALIGN 4
-	dd MAGIC
-	dd FLAGS
-	dd CHECKSUM
+	mov bx, msg
+ 	call BIOSprint
 
-section .bss
-ALIGN 16
-stack_bottom:
-	resb 16384
-stack_top:
+	;read next sector and load into memory
+	mov bx, 0x1000
+	mov es, bx
+	mov bx, 0x0
+	mov ch, 0x0		; track/cylinder number
+	mov cl, 0x02		; sector number
+	mov dh, 0x0		; head number
+	mov dl, 0x0		; drive number
 
-section .text
-global _start
-_start:
-	mov esp, stack_top
-	extern kernel_main
-	call kernel_main
+diskread:
+	mov ah, 0x2		; read disk sector
+	mov al, 0x1		; number of sectors to read
+	int 0x13		; BIOS storage interrupt
+	jc diskread		; CF = 1 if error, retry 
 
-halt:
-	hlt
-	jmp halt
+	mov ax, 0x1000
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax
 
-
+	jmp 0x1000:0x0
 
 
+	%include "BIOS/biosprint.s"
 
+  	msg db "Loading OS", 13, 10, 0
+	times 510-($-$$) db 0
+ 	dw 0xaa55
