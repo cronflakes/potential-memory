@@ -8,9 +8,9 @@
 	mov es, bx
 	mov bx, 0x0
 	mov ch, 0x0		; track/cylinder number
-	mov cl, 0x02		; sector number
+	mov cl, 0x2		; sector number
 	mov dh, 0x0		; head number
-	mov dl, 0x0		; drive number
+	mov dl, 0x80		; drive number = 0x80 hard disk 1
 
 diskread:
 	mov ah, 0x2		; read disk sector
@@ -20,10 +20,6 @@ diskread:
 
 	mov ax, 0x1000
 	mov ds, ax
-	mov es, ax
-	mov fs, ax
-	mov gs, ax
-	mov ss, ax
 
 	jmp 0x1000:0x0
 
