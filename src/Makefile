@@ -10,8 +10,8 @@ clean:
 	rm -f *.bin
 
 boot:
-	$(AS) -f bin boot.s -o boot.bin
-	$(AS) -f bin kernel.s -o kernel.bin
+	$(AS) -g -f bin boot.s -o boot.bin
+	$(AS) -g -f bin kernel.s -o kernel.bin
 	/usr/bin/cat boot.bin kernel.bin > tiny.bin
 
 #iso: 	$(OBJ)
