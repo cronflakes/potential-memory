@@ -26,6 +26,6 @@ diskread:
 
 	%include "BIOS/biosprint.s"
 
-  	msg db "Loading OS...", 13, 10, 13, 10, 0
+  	msg db 13, 10, "Loading OS...", 13, 10, 13, 10, 0
 	times 510-($-$$) db 0
  	dw 0xaa55
