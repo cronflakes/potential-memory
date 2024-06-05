@@ -1,0 +1,11 @@
+bootloader essentials
+
+- bootloader runs in real mode == easy access to BIOS functions/info
+- anytime a BIOS call is required, it's easier to do in REAL mode - so get it done now
+
+- load a GDT
+- enter protected mode
+
+second-stage loading:
+
+

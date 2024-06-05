@@ -1,18 +1,23 @@
-global set_gdt
-extern gdtp
-set_gdt:
-	lgdt [gdtp]
-	push 0x10
-	pop ds
-	push 0x10
-	pop es
-	push 0x10
-	pop fs
-	push 0x10
-	pop gs 
-	push 0x10
-	pop ss
-	jmp  0x08:.reload_CS
+gdt:
+	;NULL descriptor
+	dw 0, 0
+	db 0, 0, 0, 0
 
-.reload_CS:
+	;kernel code 
+	dw 0xffff, 0
+	db 0, 0x9a, 0xcf, 0
+
+	;kernel data
+	dw 0xffff, 0
+	db 0, 0x92, 0xcf, 0
+gdtend:
+
+gdtr:
+	dw gdtend - gdt - 1
+	dd gdt
+	
+loadgdt:
+	cli
+	lgdt [gdtr]
 	ret
+
