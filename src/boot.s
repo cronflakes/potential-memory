@@ -1,9 +1,14 @@
- 	org 0x7c00
+	org 0x7c00
 
 	mov bx, msg
  	call BIOSprint
 
-	;read next sector and load into memory
+	; =====================================
+	;
+	; read next sector and load into memory
+	;
+	; =====================================
+
 	mov bx, 0x1000
 	mov es, bx
 	mov bx, 0x0
@@ -23,7 +28,6 @@ diskread:
 	jmp 0x1000:0x0
 
 	%include "BIOS/biosprint.s"
-	%include "gdt/gdt.s"
 
   	msg db 13, 10, "Loading OS...", 13, 10, 13, 10, 0
 	times 510-($-$$) db 0

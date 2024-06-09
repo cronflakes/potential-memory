@@ -10,14 +10,7 @@ gdt:
 	;kernel data
 	dw 0xffff, 0
 	db 0, 0x92, 0xcf, 0
-gdtend:
 
 gdtr:
-	dw gdtend - gdt - 1
+	dw 0xbf
 	dd gdt
-	
-loadgdt:
-	cli
-	lgdt [gdtr]
-	ret
-

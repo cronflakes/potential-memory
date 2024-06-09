@@ -1,8 +1,8 @@
 #include <stdint.h>
+#include <stddef.h>
 
 #include "utils.h"
 #include "terminal.h"
-
 
 uint32_t strlen(char *s) {
 	uint32_t len = 0;
