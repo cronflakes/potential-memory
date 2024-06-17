@@ -1,4 +1,3 @@
-use16	
 	mov ah, 0xe
 	mov bx, msg
 	call BIOSprint
@@ -36,7 +35,6 @@ choice:
 	cmp al, "1"
 	jne prompt
 
-	
 	; =================================
 	;
 	; read 3rd sector into memory
@@ -51,11 +49,12 @@ choice:
 	mov dh, 0x0
 	mov dl, 0x80
 
-readkernel:
-	mov ah, 0x3
-	mov al, 0x9
-	int 0x13
-	jc readkernel
+;readkernel:
+	;xor bx, bx
+	;mov ah, 0x2
+	;mov al, 0x9
+	;int 0x13
+	;jc readkernel
 
 	; =================================
 	; 
@@ -79,16 +78,12 @@ readkernel:
 	mov cr0, eax
 	jmp 0x8:loadkernel
 
-use32
 loadkernel:
 	mov ax, 0x10
 	mov ds, ax
 	mov ss, ax
 	mov esp, 0xffff
-	sti	
-
-	mov byte [0xb8000], 0x41
-	mov byte [0xb8001], 0x42
+	;sti	
 
 hang:
 	jmp hang
@@ -103,5 +98,6 @@ reboot:
 	menu db  13, 10, 32, 32, 32, 32, 32, 32, 32, "1 - shell", 13, 10, 32, 32, 32, 32, 32, 32, 32, "2 - reboot", 13, 10, 0
 	shell db 13, 10, 32, 32, 'sh-$', 32, 0
 	input db " " 13, 10, 13, 10, 0
+	debug db "DEBUG", 0
 
 	times 512-($-$$) db 0	
