@@ -1,6 +1,6 @@
-CC = ${HOME}/build-i686-elf/linux/output/bin/i686-elf-gcc
+CC = ${HOME}/opt/cross/bin/i686-elf-gcc
 AS = /usr/bin/nasm
-LD = ${HOME}/build-i686-elf/linux/output/bin/i686-elf-ld
+LD = ${HOME}/opt/cross/bin/i686-elf-ld
 CFLAGS = -I../include -ffreestanding -std=gnu99 -O0 -Wall -Wextra
 OBJ = kmain.o vga.o terminal.o utils.o 
 
